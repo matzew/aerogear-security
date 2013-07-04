@@ -32,7 +32,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * Represents the current User logged in.
  */
 @Qualifier
-@Target({TYPE, METHOD, PARAMETER, FIELD})
+@Target( { TYPE, METHOD, PARAMETER, FIELD })
 @Retention(RUNTIME)
 @Documented
 public @interface LoggedUser {

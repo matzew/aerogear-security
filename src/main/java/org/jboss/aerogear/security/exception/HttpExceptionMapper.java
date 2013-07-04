@@ -17,7 +17,6 @@
 
 package org.jboss.aerogear.security.exception;
 
-
 import org.jboss.resteasy.spi.UnauthorizedException;
 
 import javax.ejb.EJBException;
@@ -27,7 +26,6 @@ import javax.ws.rs.ext.Provider;
 
 import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 import static org.jboss.aerogear.security.exception.HttpStatus.AUTHENTICATION_FAILED;
-
 
 @Provider
 public class HttpExceptionMapper implements ExceptionMapper<EJBException> {
@@ -46,4 +44,3 @@ public class HttpExceptionMapper implements ExceptionMapper<EJBException> {
         }
     }
 }
-
