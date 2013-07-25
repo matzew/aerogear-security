@@ -18,6 +18,7 @@ package org.jboss.aerogear.security.util;
 
 import java.io.ByteArrayInputStream;
 import java.security.KeyStore;
+import java.security.cert.CertificateException;
 
 /**
  * Small utility class to validate PKCS12
@@ -39,14 +40,25 @@ public final class PKCS12Util {
      * @param pass password to be provided
      * @throws Exception
      */
-    public static void validate(byte[] cert, String pass) throws Exception {
+    public static void validate(byte[] cert, String pass) throws CertificateException {
 
+        // we got a password ?
+        PKCS12Util.assertPasswordNotEmpty(pass);
         try {
             KeyStore keyStore = KeyStore.getInstance(ALGORITHM);
             keyStore.load(new ByteArrayInputStream(cert), pass.toCharArray());
         } catch (Exception e) {
-            throw new Exception("Certificate is not valid!", e);
+            throw new CertificateException("Certificate is not valid!", e);
+        }
+    }
+
+    /**
+     * Helper to check if we got a real, not empty, password
+     */
+    private static void assertPasswordNotEmpty(String password) {
+        if (password == null || password.length() == 0) {
+            throw new IllegalArgumentException("Passwords must be specified." +
+                    "Oracle Java SDK does not support passwordless p12 certificates");
         }
     }
 }
-
