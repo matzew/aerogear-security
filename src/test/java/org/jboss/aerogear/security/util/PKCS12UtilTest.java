@@ -22,7 +22,6 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.cert.CertificateException;
 
 public class PKCS12UtilTest {
 
@@ -41,17 +40,17 @@ public class PKCS12UtilTest {
         PKCS12Util.validate(valid, PASSWORD);
     }
 
-    @Test(expected = CertificateException.class)
+    @Test(expected = Exception.class)
     public void testInvalidCertificate() throws Exception {
         PKCS12Util.validate(invalid, PASSWORD);
     }
 
-    @Test(expected = CertificateException.class)
+    @Test(expected = Exception.class)
     public void testNullCertificate() throws Exception {
         PKCS12Util.validate(null, PASSWORD);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = Exception.class)
     public void testCertificateWithNullPassphrase() throws Exception {
         PKCS12Util.validate(invalid, null);
     }
